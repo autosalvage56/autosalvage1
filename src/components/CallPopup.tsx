@@ -8,15 +8,8 @@ const CallPopup = () => {
   const phoneNumber = 'xxxx-xxx';
 
   useEffect(() => {
-    // Check if popup has been shown in this session
-    const hasShownPopup = sessionStorage.getItem('hasShownPopup');
-    
-    if (!hasShownPopup) {
-      // Show popup immediately when page loads
-      setIsVisible(true);
-      // Mark as shown in session storage
-      sessionStorage.setItem('hasShownPopup', 'true');
-    }
+    // Show popup immediately when page loads
+    setIsVisible(true);
   }, []);
 
   const handleClose = () => {
