@@ -8,6 +8,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollToTopOnNavigation from "./components/ScrollToTopOnNavigation";
+import CallPopup from "./components/CallPopup";
+import FloatingOrderButton from "./components/FloatingOrderButton";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Shop from "./pages/Shop";
@@ -48,11 +50,11 @@ const App = () => (
           </main>
           <Footer />
           <ScrollToTop />
+          <CallPopup />
+          <FloatingOrderButton />
         </div>
-      </BrowserRouter>
+        </BrowserRouter>
       </CartProvider>
     </TooltipProvider>
   </QueryClientProvider>
-);
-
-export default App;
+);export default App;

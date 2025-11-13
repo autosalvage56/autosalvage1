@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, Clock } from 'lucide-react';
+import autoLogo from '@/assets/auto (1).png';
 
 const Footer = () => {
   return (
@@ -8,7 +9,7 @@ const Footer = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {/* Company Info */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <img src="/images/logo.svg" alt="AutoSalvage" className="h-10 sm:h-12 mb-3 sm:mb-4 brightness-0 invert" />
+            <img src={autoLogo} alt="AutoSalvage" className="h-10 sm:h-12 mb-3 sm:mb-4" />
             <p className="text-sm text-secondary-foreground/80 leading-relaxed">
               Genuine auto parts with fast delivery and expert support for all Indian vehicles.
             </p>

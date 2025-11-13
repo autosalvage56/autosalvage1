@@ -5,8 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import ProductCard from '@/components/ProductCard';
 import productsData from '../../data/products.json';
+import blogsData from '../../data/blogs.json';
+import Autoplay from 'embla-carousel-autoplay';
 import warehouseImg from '@/assets/warehouse.jpg';
 import qualityCheckImg from '@/assets/quality-check.jpg';
 import installationImg from '@/assets/installation.jpg';
@@ -15,18 +18,35 @@ import deliveryImg from '@/assets/delivery.jpg';
 const Index = () => {
   const featuredProducts = productsData.slice(0, 12);
 
-  const categories = [
-    { name: 'Brakes', icon: '🛑' },
-    { name: 'Filters', icon: '🔧' },
-    { name: 'Electrical', icon: '⚡' },
-    { name: 'Belts', icon: '🔗' },
-    { name: 'Cooling', icon: '❄️' },
-    { name: 'Suspension', icon: '🔩' },
-    { name: 'Lighting', icon: '💡' },
-    { name: 'Transmission', icon: '⚙️' },
+  const popularCategories = [
+    {
+      name: 'Engines',
+      image: 'https://shop.tagoreautoparts.com/wp-content/uploads/2025/09/2023-Chevy-Truck-Silverado-3500-Engine.jpg',
+      link: '/shop?category=engines'
+    },
+    {
+      name: 'Transmission',
+      image: 'https://shop.tagoreautoparts.com/wp-content/uploads/2025/09/2023-Chevy-Truck-Silverado-3500-Engine.jpg',
+      link: '/shop?category=transmission'
+    },
+    {
+      name: 'Others',
+      image: '/images/products/headlight.jpg',
+      link: '/shop?category=others'
+    }
   ];
 
-  const brands = ['Maruti', 'Hyundai', 'Tata', 'Mahindra', 'Toyota', 'Honda', 'Ford', 'Kia'];
+  const brandLogos = [
+    { name: 'Chevrolet', url: 'https://tagoreautoparts.com/img/Brand/chevy.jpg' },
+    { name: 'Dodge', url: 'https://tagoreautoparts.com/img/Brand/dodge.jpg' },
+    { name: 'Ford', url: 'https://tagoreautoparts.com/img/Brand/ford.jpg' },
+    { name: 'GMC', url: 'https://tagoreautoparts.com/img/Brand/GMC.jpg' },
+    { name: 'Honda', url: 'https://tagoreautoparts.com/img/Brand/honda.jpg' },
+    { name: 'Jeep', url: 'https://tagoreautoparts.com/img/Brand/jeep.jpg' },
+    { name: 'Mitsubishi', url: 'https://tagoreautoparts.com/img/Brand/mitsubishi.jpg' },
+    { name: 'Nissan', url: 'https://tagoreautoparts.com/img/Brand/nissan.jpg' },
+    { name: 'Scion', url: 'https://tagoreautoparts.com/img/Brand/Scion.jpg' },
+  ];
 
   const usps = [
     {
@@ -51,24 +71,26 @@ const Index = () => {
     },
   ];
 
-  const reviews = [
+  const testimonials = [
     {
-      name: 'Rajesh Kumar',
-      vehicle: 'Maruti Swift',
+      name: 'Olivia',
       rating: 5,
-      comment: 'Great quality brake pads. Perfect fit and excellent customer service!',
+      comment: 'Hyy this is Olivia. I bought an engine from Tagore Auto Parts and it\'s been running like a dream. The quality and service were excellent, and definitely worth the investment',
     },
     {
-      name: 'Priya Sharma',
-      vehicle: 'Hyundai i20',
+      name: 'Michael Chen',
       rating: 5,
-      comment: 'Fast delivery and genuine parts. Very helpful staff over the phone.',
+      comment: 'Outstanding service! The transmission I ordered was delivered quickly and installed perfectly. The team was incredibly helpful throughout the entire process.',
     },
     {
-      name: 'Amit Patel',
-      vehicle: 'Tata Nexon',
+      name: 'Sarah Johnson',
       rating: 5,
-      comment: 'Best prices for OE quality parts. Will order again!',
+      comment: 'I was skeptical about buying auto parts online, but AutoSalvage exceeded all my expectations. The quality is top-notch and the customer support is amazing!',
+    },
+    {
+      name: 'David Rodriguez',
+      rating: 5,
+      comment: 'Best experience ever! They helped me find the exact engine I needed for my truck. Installation was smooth and it runs like new. Highly recommend!',
     },
   ];
 
@@ -338,29 +360,187 @@ const Index = () => {
             </motion.div>
           </div>
         </div>
+      </section>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/80"
-        >
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-sm">Scroll to explore</span>
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center"
-            >
+      {/* Popular Categories Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">POPULAR CATEGORIES</h2>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {popularCategories.map((category, index) => (
               <motion.div
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-1 h-3 bg-white/80 rounded-full mt-2"
-              />
-            </motion.div>
+                key={category.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Link to={category.link}>
+                  <Card className="group relative overflow-hidden hover:shadow-2xl transition-all duration-300 border-0">
+                    <div className="relative h-48 overflow-hidden bg-gray-100">
+                      <img
+                        src={category.image}
+                        alt={category.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                    </div>
+                    <CardContent className="p-6 text-center bg-white">
+                      <h3 className="text-2xl font-bold text-gray-900">{category.name}</h3>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
+        </div>
+      </section>
+
+      {/* Popular Products Slider */}
+      <section className="py-16 bg-muted">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Products</h2>
+            <p className="text-muted-foreground text-lg">Quality auto parts trusted by thousands</p>
+          </motion.div>
+
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 3000,
+              }),
+            ]}
+            className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {featuredProducts.slice(0, 8).map((product, index) => (
+                <CarouselItem key={product.id} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                >
+                  <Link to={`/product/${product.slug}`}>
+                    <Card className="group relative overflow-hidden hover:shadow-2xl transition-all duration-300 h-full">
+                      {/* Badge */}
+                      {index === 0 && (
+                        <Badge className="absolute top-4 left-4 z-10 bg-red-600 text-white">
+                          BEST SELLING
+                        </Badge>
+                      )}
+                      {index === 2 && (
+                        <Badge className="absolute top-4 left-4 z-10 bg-red-600 text-white">
+                          -30%
+                        </Badge>
+                      )}
+                      {index === 1 && (
+                        <Badge className="absolute top-4 left-4 z-10 bg-gray-700 text-white">
+                          BEST SELLING
+                        </Badge>
+                      )}
+                      {index === 3 && (
+                        <Badge className="absolute top-4 left-4 z-10 bg-blue-600 text-white">
+                          NEW
+                        </Badge>
+                      )}
+
+                      {/* Heart Icon */}
+                      <button className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-gray-100 transition-colors">
+                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                      </button>
+
+                      {/* Product Image */}
+                      <div className="relative h-64 overflow-hidden bg-white">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110"
+                          onError={(e) => {
+                            e.currentTarget.src = 'https://via.placeholder.com/300x300?text=' + product.name.substring(0, 20);
+                          }}
+                        />
+                      </div>
+
+                      <CardContent className="p-4 bg-white border-t">
+                        {/* Category Badge */}
+                        <div className="mb-2">
+                          <Badge variant="outline" className="text-xs font-medium text-primary border-primary">
+                            {index === 0 || index === 3 ? 'TOPSHOP' : index === 1 ? 'BEST SELLING' : 'NEW'}
+                          </Badge>
+                        </div>
+
+                        {/* Product Name */}
+                        <h3 className="text-base font-semibold text-gray-900 mb-3 line-clamp-2 min-h-[3rem]">
+                          {product.name}
+                        </h3>
+
+                        {/* Price */}
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-baseline gap-2">
+                            {index === 2 ? (
+                              <>
+                                <span className="text-red-600 font-bold text-lg">
+                                  ${Math.round(product.price * 0.7)}
+                                </span>
+                                <span className="text-gray-400 line-through text-sm">
+                                  ${product.price}
+                                </span>
+                              </>
+                            ) : (
+                              <span className="text-gray-900 font-bold text-lg">
+                                ${product.price}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Action Button */}
+                        <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
+                          Place an order
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="-left-4 md:-left-12" />
+            <CarouselNext className="-right-4 md:-right-12" />
+          </Carousel>
+
+          {/* View All Button */}
+          <div className="relative">
+            <div className="text-center mt-8">
+              <Button asChild size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white">
+                <Link to="/shop">
+                  View All Products
+                  <ChevronRight className="w-5 h-5 ml-2" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Promotional Banner */}
@@ -411,35 +591,8 @@ const Index = () => {
         </div>
       </section>
 
-     
-
-      {/* Featured Products */}
+      {/* Brands Product Slider */}
       <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Products</h2>
-            <p className="text-muted-foreground">Popular auto parts for Indian vehicles</p>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.slug} product={product} />
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Button asChild size="lg" variant="outline">
-              <Link to="/shop">View All Parts</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Brands Section */}
-      <section className="py-16 bg-gradient-to-br from-muted via-muted/90 to-background">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -447,64 +600,264 @@ const Index = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Compatible with Popular Brands</h2>
-            <p className="text-muted-foreground text-lg">Genuine parts for all major Indian automobile manufacturers</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Brands Product</h2>
+            <p className="text-muted-foreground text-lg">Explore our wide range of quality products</p>
           </motion.div>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
-            {brands.map((brand, index) => (
+
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 3000,
+              }),
+            ]}
+            className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {productsData.filter(p => p.category === 'Others').map((product, index) => (
+                <CarouselItem key={product.id} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                >
+                  <Link to={`/product/${product.slug}`}>
+                    <Card className="group relative overflow-hidden hover:shadow-2xl transition-all duration-300 h-full">
+                      {/* Badge */}
+                      {index % 4 === 0 && (
+                        <Badge className="absolute top-4 left-4 z-10 bg-gray-700 text-white">
+                          TOPSHOP
+                        </Badge>
+                      )}
+                      {index % 4 === 1 && (
+                        <Badge className="absolute top-4 left-4 z-10 bg-red-600 text-white">
+                          BEST SELLING
+                        </Badge>
+                      )}
+                      {index % 4 === 2 && (
+                        <Badge className="absolute top-4 left-4 z-10 bg-red-600 text-white">
+                          -30%
+                        </Badge>
+                      )}
+                      {index % 4 === 3 && (
+                        <Badge className="absolute top-4 left-4 z-10 bg-blue-600 text-white">
+                          New
+                        </Badge>
+                      )}
+
+                      {/* Heart Icon */}
+                      <button className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-gray-100 transition-colors">
+                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                      </button>
+
+                      {/* Product Image */}
+                      <div className="relative h-64 overflow-hidden bg-white">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110"
+                          onError={(e) => {
+                            e.currentTarget.src = 'https://via.placeholder.com/300x300?text=' + product.name.substring(0, 20);
+                          }}
+                        />
+                      </div>
+
+                      <CardContent className="p-4 bg-white border-t">
+                        {/* Category Badge */}
+                        <div className="mb-2">
+                          <Badge variant="outline" className="text-xs font-medium text-primary border-primary">
+                            {index % 4 === 0 ? 'TOPSHOP' : index % 4 === 1 ? 'BEST SELLING' : index % 4 === 2 ? 'TOPSHOP' : 'TOPSHOP'}
+                          </Badge>
+                        </div>
+
+                        {/* Product Name */}
+                        <h3 className="text-base font-semibold text-gray-900 mb-3 line-clamp-2 min-h-[3rem]">
+                          {product.name}
+                        </h3>
+
+                        {/* Price */}
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-baseline gap-2">
+                            {index % 4 === 2 ? (
+                              <>
+                                <span className="text-red-600 font-bold text-lg">
+                                  ${Math.round(product.price * 0.7)}
+                                </span>
+                                <span className="text-gray-400 line-through text-sm">
+                                  ${product.price}
+                                </span>
+                              </>
+                            ) : (
+                              <>
+                                <span className="text-gray-400 line-through text-sm">
+                                  ${Math.round(product.price * 1.4)}
+                                </span>
+                                <span className="text-red-600 font-bold text-lg">
+                                  ${product.price}
+                                </span>
+                              </>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Action Button */}
+                        <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
+                          Place an order
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="-left-4 md:-left-12" />
+            <CarouselNext className="-right-4 md:-right-12" />
+          </Carousel>
+        </div>
+      </section>
+
+      {/* Blog Section */}
+      <section className="py-16 bg-muted">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Latest from Our Blog</h2>
+            <p className="text-muted-foreground text-lg">Expert insights and tips for your vehicle</p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {blogsData.slice(0, 3).map((blog, index) => (
               <motion.div
-                key={brand}
+                key={blog.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group"
               >
-                <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/20 cursor-pointer bg-card/50 backdrop-blur-sm">
-                  <CardContent className="p-4 sm:p-6 lg:p-8 text-center">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 p-2">
+                <Link to={`/blog/${blog.slug}`}>
+                  <Card className="h-full flex flex-col overflow-hidden hover:shadow-2xl transition-all duration-300 group">
+                    <div className="aspect-video bg-muted relative overflow-hidden">
                       <img
-                        src={
-                          brand === 'Maruti' ? 'https://i.pinimg.com/736x/7c/e0/5d/7ce05d694d74bd703c657018682cd2e6.jpg' :
-                          brand === 'Hyundai' ? 'https://logos-world.net/wp-content/uploads/2021/03/Hyundai-Logo.png' :
-                          brand === 'Tata' ? 'https://logos-world.net/wp-content/uploads/2021/03/Tata-Logo.png' :
-                          brand === 'Mahindra' ? 'https://i.pinimg.com/736x/55/06/41/550641417b2581c308939400bd7a5467.jpg' :
-                          brand === 'Toyota' ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwvGP-PIZvE-T76XKwaOg-1sOGBL1M3tPa5w&s' :
-                          brand === 'Honda' ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuMhxMBC8BhlBy4OY1GluhrB_n8aooAajgY-3GktCxKqn3sGYQ5VXvBStHzkHm0lxAaUc&usqp=CAU' :
-                          brand === 'Ford' ? 'https://static.vecteezy.com/system/resources/thumbnails/014/414/687/small_2x/ford-logo-on-transparent-background-free-vector.jpg' :
-                          brand === 'Kia' ? 'https://logos-world.net/wp-content/uploads/2021/03/Kia-Logo.png' :
-                          'https://via.placeholder.com/80x80?text=' + brand.charAt(0)
-                        }
-                        alt={`${brand} logo`}
-                        className="w-full h-full object-contain filter group-hover:brightness-110 transition-all duration-300"
-                        onError={(e) => {
-                          e.currentTarget.src = `https://via.placeholder.com/80x80/3B82F6/FFFFFF?text=${brand.charAt(0)}`;
-                        }}
+                        src={blog.image}
+                        alt={blog.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
+                      <Badge className="absolute top-4 left-4 bg-red-600 text-white">
+                        {blog.category}
+                      </Badge>
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                      {brand}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 leading-tight">
-                      {brand === 'Maruti' && 'Swift, Alto, Baleno, Dzire, Vitara'}
-                    {brand === 'Hyundai' && 'i10, i20, Creta, Verna, Venue'}
-                    {brand === 'Tata' && 'Nexon, Harrier, Safari, Tigor, Altroz'}
-                    {brand === 'Mahindra' && 'Scorpio, XUV500, Bolero, KUV100'}
-                    {brand === 'Toyota' && 'Innova, Fortuner, Corolla, Etios'}
-                    {brand === 'Honda' && 'City, Civic, CR-V, Amaze, Jazz'}
-                    {brand === 'Ford' && 'EcoSport, Figo, Aspire, Endeavour'}
-                    {brand === 'Kia' && 'Seltos, Sonet, Carnival, Carens'}
-                    </p>
-                    <div className="flex items-center justify-center gap-1 sm:gap-2 text-xs text-primary font-medium">
-                      <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" />
-                      <span>Parts Available</span>
-                    </div>
-                  </CardContent>
-                </Card>
+                    <CardContent className="flex-1 p-6">
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          <span>{new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          <span>{blog.readTime}</span>
+                        </div>
+                      </div>
+                      <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                        {blog.title}
+                      </h3>
+                      <p className="text-muted-foreground mb-4 line-clamp-3">
+                        {blog.excerpt}
+                      </p>
+                      <div className="flex items-center text-primary font-medium group-hover:gap-2 transition-all">
+                        <span>Read More</span>
+                        <ChevronRight className="w-4 h-4" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               </motion.div>
             ))}
           </div>
+
+          <div className="text-center mt-12">
+            <Button asChild size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white">
+              <Link to="/blog">
+                View All Articles
+                <ChevronRight className="w-5 h-5 ml-2" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Brands Section */}
+      <section className="py-16 bg-gradient-to-br from-gray-900 via-gray-800 to-black relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-red-600 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-red-600 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Compatible with Popular Brands</h2>
+            <p className="text-gray-300 text-lg">Quality parts for all major automobile manufacturers</p>
+          </motion.div>
+          
+          {/* Infinite scrolling logo strip */}
+          <div className="relative">
+            <style dangerouslySetInnerHTML={{__html: `
+              @keyframes scroll-brands {
+                0% {
+                  transform: translateX(0);
+                }
+                100% {
+                  transform: translateX(-50%);
+                }
+              }
+              .animate-scroll {
+                animation: scroll-brands 30s linear infinite;
+              }
+              .animate-scroll:hover {
+                animation-play-state: paused;
+              }
+            `}} />
+            
+            <div className="overflow-hidden py-8">
+              <div className="flex animate-scroll" style={{ width: 'fit-content' }}>
+                {/* Double the logos for seamless loop */}
+                {[...brandLogos, ...brandLogos].map((brand, index) => (
+                  <div 
+                    key={index}
+                    className="flex-shrink-0 mx-6 md:mx-8 lg:mx-12"
+                  >
+                    <div className="bg-white rounded-lg p-4 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-red-50 w-32 h-32 md:w-40 md:h-40 flex items-center justify-center">
+                      <img
+                        src={brand.url}
+                        alt={brand.name}
+                        className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+
 
           {/* Brand Stats */}
           <motion.div
@@ -515,17 +868,17 @@ const Index = () => {
             className="mt-16 text-center"
           >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-              <div className="p-6 bg-white/50 rounded-xl backdrop-blur-sm border border-white/20">
-                <div className="text-3xl font-bold text-primary mb-2">8+</div>
-                <div className="text-sm text-muted-foreground">Major Brands Supported</div>
+              <div className="p-6 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300">
+                <div className="text-3xl font-bold text-red-500 mb-2">9+</div>
+                <div className="text-sm text-gray-300">Major Brands Supported</div>
               </div>
-              <div className="p-6 bg-white/50 rounded-xl backdrop-blur-sm border border-white/20">
-                <div className="text-3xl font-bold text-primary mb-2">100+</div>
-                <div className="text-sm text-muted-foreground">Vehicle Models Covered</div>
+              <div className="p-6 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300">
+                <div className="text-3xl font-bold text-red-500 mb-2">150+</div>
+                <div className="text-sm text-gray-300">Vehicle Models Covered</div>
               </div>
-              <div className="p-6 bg-white/50 rounded-xl backdrop-blur-sm border border-white/20">
-                <div className="text-3xl font-bold text-primary mb-2">1000+</div>
-                <div className="text-sm text-muted-foreground">Compatible Parts Available</div>
+              <div className="p-6 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300">
+                <div className="text-3xl font-bold text-red-500 mb-2">5000+</div>
+                <div className="text-sm text-gray-300">Parts in Stock</div>
               </div>
             </div>
           </motion.div>
@@ -980,44 +1333,70 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Reviews */}
-      <section className="py-16 bg-muted">
+      {/* Testimonials */}
+      <section className="py-16 bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Customers Say</h2>
-            <p className="text-muted-foreground">Trusted by thousands of vehicle owners</p>
+            <p className="text-sm font-semibold text-gray-600 tracking-wider uppercase mb-2">CUSTOMER SAY</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-blue-600 mb-4">TESTIMONIAL</h2>
           </motion.div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {reviews.map((review, index) => (
-              <motion.div
-                key={review.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card>
-                  <CardContent className="pt-6">
-                    <div className="flex gap-1 mb-3">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <span key={i} className="text-accent text-xl">★</span>
-                      ))}
-                    </div>
-                    <p className="text-muted-foreground mb-4">"{review.comment}"</p>
-                    <div>
-                      <p className="font-semibold">{review.name}</p>
-                      <p className="text-sm text-muted-foreground">{review.vehicle}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 4000,
+              }),
+            ]}
+            className="w-full max-w-5xl mx-auto"
+          >
+            <CarouselContent>
+              {testimonials.map((testimonial, index) => (
+                <CarouselItem key={index}>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="p-4"
+                  >
+                    <Card className="border-0 shadow-2xl bg-white rounded-3xl">
+                      <CardContent className="p-8 md:p-12 text-center">
+                        {/* 5 Star Rating */}
+                        <div className="flex justify-center gap-2 mb-8">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <svg key={i} className="w-8 h-8 fill-yellow-400" viewBox="0 0 24 24">
+                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                          ))}
+                        </div>
+
+                        {/* Testimonial Text */}
+                        <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8 max-w-3xl mx-auto">
+                          "{testimonial.comment}"
+                        </p>
+
+                        {/* Author Name */}
+                        <div className="border-t border-gray-200 pt-6">
+                          <p className="text-xl font-bold text-gray-900">{testimonial.name}</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-0 md:-left-12 bg-white shadow-lg hover:bg-gray-100" />
+            <CarouselNext className="right-0 md:-right-12 bg-white shadow-lg hover:bg-gray-100" />
+          </Carousel>
         </div>
       </section>
 

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ShoppingCart } from 'lucide-react';
+import { Menu, X, ShoppingCart, Search } from 'lucide-react';
+import autoLogo from '@/assets/auto (1).png';
+import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useCart } from '@/contexts/CartContext';
@@ -15,6 +17,7 @@ import {
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const { cart, removeFromCart, updateQuantity, getCartTotal, getCartCount } = useCart();
 
   const navLinks = [
@@ -30,7 +33,7 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center">
-            <img src="/images/logo.svg" alt="AutoSalvage" className="h-12" />
+            <img src={autoLogo} alt="AutoSalvage" className="h-12" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -46,8 +49,18 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Cart Button */}
+          {/* Search Bar and Cart Button */}
           <div className="hidden md:flex items-center gap-3">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 pr-4 w-64"
+              />
+            </div>
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon" className="relative">
