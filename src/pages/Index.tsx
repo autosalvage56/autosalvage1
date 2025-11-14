@@ -291,24 +291,27 @@ const Index = () => {
                   <div className="space-y-3 sm:space-y-4">
                     <select className="w-full p-3 sm:p-4 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base">
                       <option>Select Vehicle Brand</option>
-                      <option>Maruti Suzuki</option>
-                      <option>Hyundai</option>
-                      <option>Tata</option>
-                      <option>Mahindra</option>
-                      <option>Toyota</option>
+                      <option>Chevrolet</option>
+                      <option>Dodge</option>
+                      <option>Ford</option>
+                      <option>GMC</option>
                       <option>Honda</option>
+                      <option>Jeep</option>
+                      <option>Mitsubishi</option>
+                      <option>Nissan</option>
+                      <option>Scion</option>
                     </select>
                     <select className="w-full p-3 sm:p-4 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base">
                       <option>Select Part Category</option>
-                      <option>Brake Parts</option>
-                      <option>Engine Parts</option>
-                      <option>Filters</option>
-                      <option>Electrical</option>
-                      <option>Suspension</option>
+                      <option>Engines</option>
+                      <option>Transmission</option>
+                      <option>Others</option>
                     </select>
-                    <Button className="w-full h-10 sm:h-12 text-base sm:text-lg">
-                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                      Get Quote Now
+                    <Button asChild className="w-full h-10 sm:h-12 text-base sm:text-lg">
+                      <Link to="/contact">
+                        <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                        Get Quote Now
+                      </Link>
                     </Button>
                   </div>
                 </CardContent>

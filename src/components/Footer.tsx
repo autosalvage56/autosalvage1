@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, Clock } from 'lucide-react';
+import { Clock } from 'lucide-react';
 import autoLogo from '@/assets/auto (1).png';
 
 const Footer = () => {
@@ -39,10 +39,6 @@ const Footer = () => {
           <div className="sm:col-span-2 lg:col-span-1">
             <h3 className="font-heading font-semibold mb-3 sm:mb-4 text-base sm:text-lg">Contact Us</h3>
             <ul className="space-y-3">
-              <li className="flex items-center gap-3 text-sm">
-                <Mail className="w-4 h-4 text-primary flex-shrink-0" />
-                <a href="mailto:hello@autosalvage.com" className="hover:text-primary transition-colors">hello@autosalvage.com</a>
-              </li>
               <li className="flex items-start gap-3 text-sm">
                 <Clock className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                 <div>

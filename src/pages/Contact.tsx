@@ -72,25 +72,6 @@ const Contact = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <Card className="h-full">
-                <CardHeader className="pb-3">
-                  <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-primary mb-2" />
-                  <CardTitle className="text-base sm:text-lg">Email</CardTitle>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <a href="mailto:hello@autosalvage.com" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors break-all">
-                    hello@autosalvage.com
-                  </a>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <Card className="h-full">
