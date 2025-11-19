@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="sm:col-span-2 lg:col-span-1">
             <img src={autoLogo} alt="AutoSalvage" className="h-10 sm:h-12 mb-3 sm:mb-4" />
             <p className="text-sm text-secondary-foreground/80 leading-relaxed">
-              Genuine auto parts with fast delivery and expert support for all Indian vehicles.
+              Genuine auto parts with expert support and reliable delivery for all US vehicles.
             </p>
           </div>
 

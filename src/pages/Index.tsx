@@ -26,7 +26,7 @@ const Index = () => {
     },
     {
       name: 'Transmission',
-      image: 'https://shop.tagoreautoparts.com/wp-content/uploads/2025/09/2023-Chevy-Truck-Silverado-3500-Engine.jpg',
+      image: 'https://shop.tagoreautoparts.com/wp-content/uploads/2025/09/GMC-Yukoon-Transmission.webp',
       link: '/shop?category=transmission'
     },
     {
@@ -62,12 +62,12 @@ const Index = () => {
     {
       icon: Wrench,
       title: 'Expert Fitment',
-      description: 'Free phone support to ensure correct parts.',
+      description: 'Expert phone support to ensure correct parts.',
     },
     {
       icon: Award,
       title: 'Warranty Support',
-      description: '6-18 month warranties on all parts.',
+      description: '6-18 month warranties on all parts.'
     },
   ];
 
@@ -105,11 +105,11 @@ const Index = () => {
     },
     {
       question: 'How quickly do you ship?',
-      answer: 'Most in-stock parts ship the same day if ordered before 3 PM. Delivery typically takes 2-5 business days depending on your location.',
+      answer: 'Most in-stock parts ship the same day if ordered before 3 PM EST. Delivery typically takes 7-14 business days depending on your location.',
     },
     {
       question: 'What if the part doesn\'t fit my vehicle?',
-      answer: 'We provide detailed compatibility information and free fitment advice. If there\'s an issue, contact us immediately and we\'ll help resolve it.',
+      answer: 'We provide detailed compatibility information and expert fitment advice. If there\'s an issue, contact us immediately and we\'ll help resolve it.',
     },
     {
       question: 'Can I return a part?',
@@ -237,14 +237,14 @@ const Index = () => {
                 transition={{ duration: 0.8, delay: 0.8 }}
                 className="flex flex-col sm:flex-row gap-4 sm:gap-6"
               >
-                <Button asChild size="lg" className="text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 bg-primary hover:bg-primary/90 transform hover:scale-105 transition-all duration-200 shadow-xl">
+                <Button asChild className="text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 bg-primary hover:bg-primary/90 transform hover:scale-105 transition-all duration-200 shadow-xl">
                   <Link to="/shop" className="flex items-center gap-2 sm:gap-3 justify-center">
                     <Package className="w-5 h-5 sm:w-6 sm:h-6" />
                     Browse Catalog
                     <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 bg-white/10 hover:bg-white/20 border-white/30 text-white backdrop-blur-sm transform hover:scale-105 transition-all duration-200">
+                <Button asChild className="text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 bg-white/10 hover:bg-white/20 border-white/30 text-white backdrop-blur-sm transform hover:scale-105 transition-all duration-200">
                   <Link to="/contact" className="flex items-center gap-2 sm:gap-3 justify-center">
                     <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
                     Contact Us
@@ -487,7 +487,7 @@ const Index = () => {
                       <CardContent className="p-4 bg-white border-t">
                         {/* Category Badge */}
                         <div className="mb-2">
-                          <Badge variant="outline" className="text-xs font-medium text-primary border-primary">
+                          <Badge className="text-xs font-medium text-primary border-primary border">
                             {index === 0 || index === 3 ? 'TOPSHOP' : index === 1 ? 'BEST SELLING' : 'NEW'}
                           </Badge>
                         </div>
@@ -535,7 +535,7 @@ const Index = () => {
           {/* View All Button */}
           <div className="relative">
             <div className="text-center mt-8">
-              <Button asChild size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white">
+              <Button asChild className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-6">
                 <Link to="/shop">
                   View All Products
                   <ChevronRight className="w-5 h-5 ml-2" />
@@ -559,7 +559,7 @@ const Index = () => {
             <p className="text-sm sm:text-base lg:text-lg font-semibold">
               Limited Time Offer: Get 10% off on all brake parts! Shop now to order.
             </p>
-            <Button asChild variant="secondary" size="sm" className="mt-2 sm:mt-0">
+            <Button asChild className="mt-2 sm:mt-0 bg-secondary hover:bg-secondary/90 text-secondary-foreground px-4 py-2">
               <Link to="/shop">
                 <Package className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                 Shop Now
@@ -674,7 +674,7 @@ const Index = () => {
                       <CardContent className="p-4 bg-white border-t">
                         {/* Category Badge */}
                         <div className="mb-2">
-                          <Badge variant="outline" className="text-xs font-medium text-primary border-primary">
+                          <Badge className="text-xs font-medium text-primary border-primary border">
                             {index % 4 === 0 ? 'TOPSHOP' : index % 4 === 1 ? 'BEST SELLING' : index % 4 === 2 ? 'TOPSHOP' : 'TOPSHOP'}
                           </Badge>
                         </div>
@@ -735,8 +735,8 @@ const Index = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Latest from Our Blog</h2>
-            <p className="text-muted-foreground text-lg">Expert insights and tips for your vehicle</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Latest from Our Blog</h2>
+            <p className="text-foreground/70 text-lg">Expert insights and tips for your vehicle</p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -789,10 +789,10 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Button asChild size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white">
-              <Link to="/blog">
+            <Button asChild className="bg-red-600 hover:bg-red-700 text-white px-8 py-6">
+              <Link to="/blog" className="flex items-center gap-2">
                 View All Articles
-                <ChevronRight className="w-5 h-5 ml-2" />
+                <ChevronRight className="w-5 h-5" />
               </Link>
             </Button>
           </div>
@@ -932,14 +932,14 @@ const Index = () => {
               transition={{ delay: 0.1 }}
             >
               <Card className="relative overflow-hidden hover:shadow-xl transition-all border-primary/20">
-                <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground">FREE SHIPPING</Badge>
+                <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground">BULK ORDERS</Badge>
                 <CardContent className="pt-6">
                   <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Truck className="w-8 h-8 text-primary" />
                   </div>
                   <h3 className="font-heading font-semibold text-xl mb-2 text-center">Bulk Order Benefits</h3>
                   <p className="text-muted-foreground text-center mb-4">
-                    Free shipping on orders over $100. Same-day dispatch guaranteed.
+                    Receive genuine parts at your doorstep within 7-14 business days. Same-day dispatch guaranteed.
                   </p>
                   <Button asChild className="w-full">
                     <Link to="/contact">
@@ -1257,7 +1257,7 @@ const Index = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent flex items-end p-6">
                 <div className="text-secondary-foreground">
                   <h3 className="font-heading font-semibold text-xl mb-1">Expert Installation</h3>
-                  <p className="text-sm text-secondary-foreground/80">Free fitment advice from our team</p>
+                  <p className="text-sm text-secondary-foreground/80">Receive genuine parts at your doorstep within 7-14 business days</p>
                 </div>
               </div>
             </motion.div>
@@ -1444,9 +1444,9 @@ const Index = () => {
               Need help finding the right part?
             </h2>
             <p className="text-lg mb-8 text-primary-foreground/90">
-              Our experts are ready to assist you. Contact us for free fitment advice.
+              Our experts are ready to assist you. Receive genuine parts at your doorstep within 7-14 business days.
             </p>
-            <Button asChild size="lg" variant="secondary" className="text-lg">
+            <Button asChild className="text-lg bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8 py-6">
               <Link to="/contact" className="flex items-center gap-2">
                 <Phone className="w-5 h-5" />
                 Contact Us

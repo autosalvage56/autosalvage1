@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 
 const CallPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const phoneNumber = 'xxxx-xxx';
+  const phoneNumber = 'xxx-xxx-xxxx';
 
   useEffect(() => {
     // Show popup immediately when page loads
@@ -17,7 +17,8 @@ const CallPopup = () => {
   };
 
   const handleCall = () => {
-    window.location.href = `tel:${phoneNumber.replace(/\s/g, '')}`;
+    // Call functionality disabled until phone number is added
+    // window.location.href = `tel:${phoneNumber.replace(/\s/g, '')}`;
   };
 
   return (
@@ -73,7 +74,6 @@ const CallPopup = () => {
                 {/* Call Now Button */}
                 <Button
                   onClick={handleCall}
-                  size="lg"
                   className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold text-lg py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 >
                   <Phone className="w-5 h-5 mr-2" />

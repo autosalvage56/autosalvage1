@@ -125,7 +125,7 @@ const Contact = () => {
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+91-XXXXX-XXXXX"
+                      placeholder="xxx-xxx-xxxx"
                       required
                     />
                   </div>
@@ -139,7 +139,7 @@ const Contact = () => {
                       type="text"
                       value={formData.vehicle}
                       onChange={(e) => setFormData({ ...formData, vehicle: e.target.value })}
-                      placeholder="e.g., Maruti Swift 2020"
+                      placeholder="e.g., Honda Civic 2020"
                     />
                   </div>
 
