@@ -237,7 +237,7 @@ const Index = () => {
                 transition={{ duration: 0.8, delay: 0.8 }}
                 className="flex flex-col sm:flex-row gap-4 sm:gap-6"
               >
-                <Button asChild className="text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 bg-primary hover:bg-primary/90 transform hover:scale-105 transition-all duration-200 shadow-xl">
+                <Button asChild className="text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 bg-primary hover:bg-primary/90 text-white transform hover:scale-105 transition-all duration-200 shadow-xl">
                   <Link to="/shop" className="flex items-center gap-2 sm:gap-3 justify-center">
                     <Package className="w-5 h-5 sm:w-6 sm:h-6" />
                     Browse Catalog
@@ -1057,7 +1057,7 @@ const Index = () => {
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
                   <h3 className="text-5xl md:text-6xl font-bold mb-4">FABRICATED MUSCLE</h3>
                   <p className="text-2xl md:text-3xl text-gray-300 mb-6">Precision-engineered performance parts for maximum power</p>
-                  <Button className="bg-primary hover:bg-primary/90 text-xl h-14 px-10">
+                  <Button className="bg-primary hover:bg-primary/90 text-white text-xl h-14 px-10">
                     Explore Performance Parts
                   </Button>
                 </div>

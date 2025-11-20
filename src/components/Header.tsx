@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, ShoppingCart, Search } from 'lucide-react';
 import autoLogo from '@/assets/auto (1).png';
 import { Input } from '@/components/ui/input';
@@ -19,6 +19,15 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { cart, removeFromCart, updateQuantity, getCartTotal, getCartCount } = useCart();
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery('');
+    }
+  };
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -51,24 +60,24 @@ const Header = () => {
 
           {/* Search Bar and Cart Button */}
           <div className="hidden md:flex items-center gap-3">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <form onSubmit={handleSearch} className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
               <Input
                 type="text"
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch(e)}
                 className="pl-10 pr-4 w-64"
               />
-            </div>
+            </form>
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon" className="relative">
+                <Button className="relative h-10 w-10 border border-input bg-background hover:bg-accent hover:text-accent-foreground">
                   <ShoppingCart className="w-5 h-5" />
                   {getCartCount() > 0 && (
                     <Badge 
-                      className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs"
-                      variant="destructive"
+                      className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs bg-destructive text-destructive-foreground"
                     >
                       {getCartCount()}
                     </Badge>
@@ -108,25 +117,21 @@ const Header = () => {
                             </p>
                             <div className="flex items-center gap-2 mt-2">
                               <Button
-                                variant="outline"
-                                size="sm"
+                                className="h-9 rounded-md px-3 border border-input bg-background hover:bg-accent hover:text-accent-foreground"
                                 onClick={() => updateQuantity(item.id, item.quantity - 1)}
                               >
                                 -
                               </Button>
                               <span className="text-sm font-medium">{item.quantity}</span>
                               <Button
-                                variant="outline"
-                                size="sm"
+                                className="h-9 rounded-md px-3 border border-input bg-background hover:bg-accent hover:text-accent-foreground"
                                 onClick={() => updateQuantity(item.id, item.quantity + 1)}
                               >
                                 +
                               </Button>
                               <Button
-                                variant="ghost"
-                                size="sm"
+                                className="h-9 rounded-md px-3 ml-auto text-destructive hover:bg-accent hover:text-accent-foreground"
                                 onClick={() => removeFromCart(item.id)}
-                                className="ml-auto text-destructive"
                               >
                                 Remove
                               </Button>
@@ -180,13 +185,12 @@ const Header = () => {
             <div className="mt-4 px-2">
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="outline" className="w-full relative justify-start">
+                  <Button className="w-full relative justify-start border border-input bg-background hover:bg-accent hover:text-accent-foreground">
                     <ShoppingCart className="w-4 h-4 mr-2" />
                     View Cart
                     {getCartCount() > 0 && (
                       <Badge 
-                        className="ml-auto h-5 min-w-[20px] flex items-center justify-center p-1 text-xs"
-                        variant="destructive"
+                        className="ml-auto h-5 min-w-[20px] flex items-center justify-center p-1 text-xs bg-destructive text-destructive-foreground"
                       >
                         {getCartCount()}
                       </Badge>
@@ -226,25 +230,21 @@ const Header = () => {
                               </p>
                               <div className="flex items-center gap-2 mt-2">
                                 <Button
-                                  variant="outline"
-                                  size="sm"
+                                  className="h-9 rounded-md px-3 border border-input bg-background hover:bg-accent hover:text-accent-foreground"
                                   onClick={() => updateQuantity(item.id, item.quantity - 1)}
                                 >
                                   -
                                 </Button>
                                 <span className="text-sm font-medium">{item.quantity}</span>
                                 <Button
-                                  variant="outline"
-                                  size="sm"
+                                  className="h-9 rounded-md px-3 border border-input bg-background hover:bg-accent hover:text-accent-foreground"
                                   onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                 >
                                   +
                                 </Button>
                                 <Button
-                                  variant="ghost"
-                                  size="sm"
+                                  className="h-9 rounded-md px-3 ml-auto text-destructive hover:bg-accent hover:text-accent-foreground"
                                   onClick={() => removeFromCart(item.id)}
-                                  className="ml-auto text-destructive"
                                 >
                                   Remove
                                 </Button>

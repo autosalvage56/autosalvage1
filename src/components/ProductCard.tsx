@@ -73,7 +73,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <p className="text-lg sm:text-xl font-bold text-primary">${product.price.toLocaleString()}</p>
         </CardContent>
         <CardFooter className="p-3 sm:p-4 pt-0 flex flex-col sm:flex-row gap-2">
-          <Button asChild variant="outline" className="w-full sm:flex-1 h-9 sm:h-10 text-xs sm:text-sm">
+          <Button asChild className="w-full sm:flex-1 h-9 sm:h-10 text-xs sm:text-sm border border-input bg-background hover:bg-accent hover:text-accent-foreground">
             <Link to={`/product/${product.slug}`}>View Details</Link>
           </Button>
           <Button 
